@@ -3,150 +3,358 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>RIO Pivot Funding Opportunities</title>
+  <title>Research and Innovation Office | Live Funding Opportunity Feed</title>
 
   <style>
-    body {
-      font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
-      margin: 0;
-      background: #fafafa;
-      color: #111;
+    :root{
+      /* CU-coded palette (navy + gold + neutrals) */
+      --cu-navy: #0B1F3B;
+      --cu-gold: #CFB87C;
+      --cu-ink:  #101828;
+      --cu-muted:#475467;
+      --cu-bg:   #F6F7FB;
+      --cu-card: #FFFFFF;
+      --cu-line: #E4E7EC;
+      --cu-link: #0B3B8C;
+      --shadow:  0 10px 30px rgba(16,24,40,.08);
+      --radius:  16px;
     }
 
-    .container {
+    * { box-sizing: border-box; }
+
+    body{
+      margin:0;
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      color: var(--cu-ink);
+      background: radial-gradient(1200px 700px at 15% -10%, rgba(207,184,124,.25), transparent 60%),
+                  radial-gradient(900px 600px at 90% 0%, rgba(11,31,59,.12), transparent 60%),
+                  var(--cu-bg);
+    }
+
+    a{ color: var(--cu-link); text-decoration: none; }
+    a:hover{ text-decoration: underline; }
+
+    .topbar{
+      background: linear-gradient(90deg, var(--cu-navy), #08162A);
+      color:#fff;
+      border-bottom: 4px solid var(--cu-gold);
+    }
+
+    .container{
       max-width: 1200px;
       margin: 0 auto;
-      padding: 28px 18px 40px;
+      padding: 22px 18px 40px;
     }
 
-    h1 {
-      margin-bottom: 6px;
+    .brand{
+      display:flex;
+      gap:14px;
+      align-items:center;
+      justify-content: space-between;
+      flex-wrap: wrap;
     }
 
-    .subtitle {
-      color: #555;
-      line-height: 1.5;
-      max-width: 900px;
-      margin-bottom: 12px;
+    .brand-left{
+      display:flex;
+      gap:12px;
+      align-items:center;
+      flex-wrap: wrap;
     }
 
-    .meta {
-      font-size: 0.9rem;
-      color: #666;
-      margin-bottom: 16px;
+    .badge{
+      width: 42px;
+      height: 42px;
+      border-radius: 12px;
+      background: rgba(255,255,255,.1);
+      border: 1px solid rgba(255,255,255,.18);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      font-weight: 700;
+      color: var(--cu-gold);
+      letter-spacing: .5px;
     }
 
-    .card {
-      background: #ffffff;
-      border: 1px solid #e6e6e6;
-      border-radius: 14px;
-      margin-top: 18px;
-      overflow: hidden;
+    .titlewrap h1{
+      font-size: 1.25rem;
+      margin: 0;
+      font-weight: 700;
+      letter-spacing: .2px;
     }
 
-    .iframe-wrapper {
-      width: 100%;
-      height: 900px;
+    .titlewrap .sub{
+      margin: 2px 0 0;
+      color: rgba(255,255,255,.82);
+      font-size: .98rem;
+      line-height: 1.3;
     }
 
-    iframe {
-      width: 100%;
-      height: 100%;
-      border: 0;
+    .meta{
+      display:flex;
+      gap:10px;
+      align-items:center;
+      flex-wrap: wrap;
+      color: rgba(255,255,255,.86);
+      font-size: .92rem;
     }
 
-    .note {
-      font-size: 0.95rem;
-      color: #666;
+    .chip{
+      display:inline-flex;
+      gap:8px;
+      align-items:center;
+      padding: 8px 12px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,.18);
+      background: rgba(255,255,255,.08);
+      color:#fff;
+      white-space: nowrap;
+    }
+
+    main .container{
+      padding-top: 18px;
+    }
+
+    .lead{
+      display:flex;
+      gap:14px;
+      align-items:flex-start;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      margin: 18px 0 14px;
+    }
+
+    .lead p{
+      margin:0;
+      color: var(--cu-muted);
+      max-width: 880px;
+      line-height: 1.55;
+      font-size: 1.02rem;
+    }
+
+    .panel{
+      background: var(--cu-card);
+      border: 1px solid var(--cu-line);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      overflow:hidden;
+    }
+
+    .panel-head{
+      padding: 14px 16px;
+      border-bottom: 1px solid var(--cu-line);
+      display:flex;
+      align-items:center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 10px;
+      background: linear-gradient(180deg, rgba(207,184,124,.16), transparent);
+    }
+
+    .panel-head .heading{
+      font-weight: 700;
+      margin:0;
+      color: var(--cu-ink);
+    }
+
+    .panel-head .hint{
+      margin:0;
+      color: var(--cu-muted);
+      font-size: .95rem;
+    }
+
+    .iframeWrap{
+      width:100%;
+      height: 920px;
+      background: #fff;
+    }
+
+    iframe{
+      width:100%;
+      height:100%;
+      border:0;
+      background:#fff;
+    }
+
+    .below{
+      padding: 16px;
+      border-top: 1px solid var(--cu-line);
+      background: #fff;
+    }
+
+    .note{
+      margin:0;
+      color: var(--cu-muted);
+      font-size: .95rem;
+      line-height: 1.55;
+    }
+
+    .grid{
+      display:grid;
+      grid-template-columns: 1.2fr .8fr;
+      gap: 14px;
       margin-top: 14px;
-      line-height: 1.5;
-      max-width: 1000px;
     }
 
-    .links {
-      margin-top: 18px;
-      font-size: 0.95rem;
-      line-height: 1.6;
+    @media (max-width: 920px){
+      .grid{ grid-template-columns: 1fr; }
+      .iframeWrap{ height: 980px; }
     }
 
-    .links a {
-      color: #0056b3;
-      text-decoration: none;
+    .card{
+      background: #fff;
+      border: 1px solid var(--cu-line);
+      border-radius: var(--radius);
+      padding: 14px 14px;
+      box-shadow: 0 8px 20px rgba(16,24,40,.05);
     }
 
-    .links a:hover {
-      text-decoration: underline;
+    .card h3{
+      margin: 0 0 8px;
+      font-size: 1.02rem;
+      color: var(--cu-ink);
+    }
+
+    .card p{
+      margin: 0;
+      color: var(--cu-muted);
+      line-height: 1.55;
+      font-size: .95rem;
+    }
+
+    .linkrow{
+      margin-top: 10px;
+      display:flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .linkbtn{
+      display:flex;
+      justify-content: space-between;
+      align-items:center;
+      gap: 10px;
+      padding: 10px 12px;
+      border-radius: 12px;
+      border: 1px solid var(--cu-line);
+      background: linear-gradient(180deg, rgba(11,31,59,.04), rgba(11,31,59,.01));
+    }
+
+    .linkbtn strong{
+      color: var(--cu-ink);
+      font-weight: 650;
+    }
+
+    .linkbtn span{
+      color: var(--cu-muted);
+      font-size: .9rem;
+    }
+
+    .goldbar{
+      height: 3px;
+      width: 100%;
+      background: var(--cu-gold);
+      border-radius: 999px;
+      margin: 12px 0 0;
     }
   </style>
 </head>
 
 <body>
-  <div class="container">
-    <h1>Research and Innovation Office</h1>
+  <header class="topbar">
+    <div class="container">
+      <div class="brand">
+        <div class="brand-left">
+          <div class="badge">RIO</div>
+          <div class="titlewrap">
+            <h1>Research and Innovation Office</h1>
+            <p class="sub">Live Funding Opportunity Feed (Pivot-RP)</p>
+          </div>
+        </div>
 
-    <p class="subtitle">
-      Live Funding Opportunity Feed
-    </p>
-
-    <div class="meta">
-      Last updated: January 4, 2026
-    </div>
-
-    <p class="note">
-      These opportunities represent current funding opportunities identified as potentially useful for faculty.
-      Researchers are encouraged to review each opportunity carefully and determine what best aligns with their
-      specific research interests and goals.
-    </p>
-
-    <div class="card">
-      <div class="iframe-wrapper">
-        <iframe
-          src="https://pivot.proquest.com/embedded/4d170b34288c468f8091f2f1552f7976"
-          title="Funding from Pivot-RP"
-          loading="lazy">
-        </iframe>
+        <div class="meta">
+          <div class="chip">Last updated: Jan 4, 2026</div>
+          <div class="chip">Sorted by: Deadline</div>
+        </div>
       </div>
     </div>
+  </header>
 
-    <p class="note">
-      Access may require institutional login. Results update automatically as opportunities are added or archived in Pivot-RP.
-    </p>
+  <main>
+    <div class="container">
+      <div class="lead">
+        <p>
+          This page displays current funding opportunities identified as potentially useful for CU Boulder faculty.
+          Please use the search and filters within the feed to find opportunities that best fit your research area, eligibility, and timeline.
+        </p>
+      </div>
 
-    <div class="links">
-      <p>
-        If you have any questions, please contact
-        <a href="mailto:rio@colorado.edu">rio@colorado.edu</a>.
-      </p>
+      <section class="panel">
+        <div class="panel-head">
+          <div>
+            <p class="heading">Funding Opportunities</p>
+            <p class="hint">Tip: filter by keyword, sponsor, deadline, and eligibility inside the Pivot-RP window.</p>
+          </div>
+        </div>
 
-      <p>
-        For more information, visit the
-        <a href="https://www.colorado.edu/researchinnovation/research-innovation-office-rio-bulletin" target="_blank" rel="noreferrer">
-          Research and Innovation Office (RIO) Bulletin
-        </a>.
-      </p>
+        <div class="iframeWrap">
+          <iframe
+            src="https://pivot.proquest.com/embedded/4d170b34288c468f8091f2f1552f7976"
+            title="Funding from Pivot-RP"
+            loading="lazy">
+          </iframe>
+        </div>
 
-      <p>
-        To learn more about the JEDIA community, visit:
-        <a href="https://www.colorado.edu/researchinnovation/node/8528/faculty-development-and-workshops/jedia-workshops" target="_blank" rel="noreferrer">
-          JEDIA Workshops and Learning Community
-        </a>.
-      </p>
+        <div class="below">
+          <p class="note">
+            Access may require institutional login. Results update automatically as opportunities are added or archived in Pivot-RP.
+          </p>
 
-      <p>
-        The JEDIA Scholar Learning Community aims to support investigators, scholars, creators, and researchers across
-        the university by fostering a welcoming and inclusive environment. The community focuses on developing
-        opportunities that embrace diversity, equity, and inclusion through interdisciplinary work and meaningful
-        research impact.
-      </p>
+          <div class="grid">
+            <div class="card">
+              <h3>JEDIA Scholar Learning Community</h3>
+              <p>
+                The JEDIA Scholar Learning Community aims to support investigators, scholars, creators and researchers across
+                the university by building a welcoming and inclusive environment. The community focuses on the development of opportunities
+                that embrace diversity, equity and inclusion principles through interdisciplinary work. Participants will strengthen their
+                capacity to create meaningful research impacts.
+              </p>
+              <div class="goldbar"></div>
+            </div>
 
-      <p>
-        To request and schedule a consultation, please visit:
-        <br />
-        <a href="https://www.colorado.edu/researchinnovation/research-impact-broader-impacts-request-consultation" target="_blank" rel="noreferrer">
-          Research Impact & Broader Impacts – Request a Consultation
-        </a>
-      </p>
+            <div class="card">
+              <h3>Links & Support</h3>
+              <p>Questions? Contact <a href="mailto:rio@colorado.edu">rio@colorado.edu</a>.</p>
+
+              <div class="linkrow">
+                <a class="linkbtn" href="https://www.colorado.edu/researchinnovation/research-innovation-office-rio-bulletin" target="_blank" rel="noreferrer">
+                  <div>
+                    <strong>RIO Bulletin</strong><br/>
+                    <span>Updates and announcements</span>
+                  </div>
+                  <span>↗</span>
+                </a>
+
+                <a class="linkbtn" href="https://www.colorado.edu/researchinnovation/node/8528/faculty-development-and-workshops/jedia-workshops" target="_blank" rel="noreferrer">
+                  <div>
+                    <strong>JEDIA Workshops and Learning Community</strong><br/>
+                    <span>Faculty development & workshops</span>
+                  </div>
+                  <span>↗</span>
+                </a>
+
+                <a class="linkbtn" href="https://www.colorado.edu/researchinnovation/research-impact-broader-impacts-request-consultation" target="_blank" rel="noreferrer">
+                  <div>
+                    <strong>Research Impact & Broader Impacts</strong><br/>
+                    <span>Request a consultation</span>
+                  </div>
+                  <span>↗</span>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
     </div>
-  </div>
+  </main>
 </body>
 </html>
