@@ -7,86 +7,110 @@
 
   <style>
     :root{
-      /* CU-coded palette (navy + gold + neutrals) */
+      /* CU Boulder inspired palette */
       --cu-navy: #0B1F3B;
+      --cu-navy-2:#08162A;
       --cu-gold: #CFB87C;
-      --cu-ink:  #101828;
-      --cu-muted:#475467;
-      --cu-bg:   #F6F7FB;
-      --cu-card: #FFFFFF;
-      --cu-line: #E4E7EC;
-      --cu-link: #0B3B8C;
-      --shadow:  0 10px 30px rgba(16,24,40,.08);
-      --radius:  16px;
+
+      --ink: #0F172A;
+      --muted:#475569;
+      --muted-2:#64748B;
+
+      --bg: #F6F7FB;
+      --card:#FFFFFF;
+      --line:#E5E7EB;
+
+      --link:#0B3B8C;
+
+      --shadow: 0 14px 40px rgba(15, 23, 42, .10);
+      --shadow-soft: 0 10px 24px rgba(15, 23, 42, .07);
+
+      --radius: 18px;
+      --radius-sm: 14px;
+
+      --maxw: 1180px;
     }
 
-    * { box-sizing: border-box; }
+    *{ box-sizing: border-box; }
+    html{ scroll-behavior: smooth; }
 
     body{
       margin:0;
-      font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
-      color: var(--cu-ink);
-      background: radial-gradient(1200px 700px at 15% -10%, rgba(207,184,124,.25), transparent 60%),
-                  radial-gradient(900px 600px at 90% 0%, rgba(11,31,59,.12), transparent 60%),
-                  var(--cu-bg);
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      color: var(--ink);
+      background:
+        radial-gradient(1100px 680px at 12% -8%, rgba(207,184,124,.26), transparent 60%),
+        radial-gradient(900px 520px at 88% -6%, rgba(11,31,59,.14), transparent 62%),
+        linear-gradient(180deg, rgba(11,31,59,.05), transparent 26%),
+        var(--bg);
     }
 
-    a{ color: var(--cu-link); text-decoration: none; }
+    a{ color: var(--link); text-decoration: none; }
     a:hover{ text-decoration: underline; }
 
-    .topbar{
-      background: linear-gradient(90deg, var(--cu-navy), #08162A);
-      color:#fff;
-      border-bottom: 4px solid var(--cu-gold);
+    .wrap{
+      max-width: var(--maxw);
+      margin: 0 auto;
+      padding: 22px 18px 48px;
     }
 
-    .container{
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 22px 18px 40px;
+    /* Topbar */
+    .topbar{
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      background:
+        linear-gradient(90deg, rgba(11,31,59,.95), rgba(8,22,42,.95));
+      border-bottom: 1px solid rgba(255,255,255,.12);
+      box-shadow: 0 10px 30px rgba(0,0,0,.10);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
     }
 
     .brand{
       display:flex;
-      gap:14px;
+      gap:16px;
       align-items:center;
       justify-content: space-between;
       flex-wrap: wrap;
+      padding: 14px 0;
     }
 
     .brand-left{
       display:flex;
       gap:12px;
       align-items:center;
-      flex-wrap: wrap;
+      min-width: 260px;
     }
 
     .badge{
-      width: 42px;
-      height: 42px;
-      border-radius: 12px;
-      background: rgba(255,255,255,.1);
-      border: 1px solid rgba(255,255,255,.18);
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      font-weight: 700;
+      width: 44px;
+      height: 44px;
+      border-radius: 14px;
+      background: rgba(255,255,255,.08);
+      border: 1px solid rgba(255,255,255,.16);
+      display:grid;
+      place-items:center;
+      font-weight: 800;
       color: var(--cu-gold);
-      letter-spacing: .5px;
+      letter-spacing: .7px;
+      box-shadow: inset 0 0 0 1px rgba(207,184,124,.10);
     }
 
     .titlewrap h1{
-      font-size: 1.25rem;
+      font-size: 1.18rem;
       margin: 0;
-      font-weight: 700;
+      font-weight: 780;
       letter-spacing: .2px;
+      color: #fff;
+      line-height: 1.15;
     }
 
     .titlewrap .sub{
-      margin: 2px 0 0;
-      color: rgba(255,255,255,.82);
-      font-size: .98rem;
-      line-height: 1.3;
+      margin: 4px 0 0;
+      color: rgba(255,255,255,.80);
+      font-size: .96rem;
+      line-height: 1.35;
     }
 
     .meta{
@@ -108,60 +132,143 @@
       background: rgba(255,255,255,.08);
       color:#fff;
       white-space: nowrap;
+      transition: transform .18s ease, background .18s ease;
+    }
+    .chip:hover{ transform: translateY(-1px); background: rgba(255,255,255,.11); }
+
+    .chip-dot{
+      width: 8px;
+      height: 8px;
+      border-radius: 99px;
+      background: var(--cu-gold);
+      box-shadow: 0 0 0 3px rgba(207,184,124,.18);
     }
 
-    main .container{
+    /* Intro */
+    .hero{
       padding-top: 18px;
     }
 
     .lead{
       display:flex;
-      gap:14px;
       align-items:flex-start;
       justify-content: space-between;
+      gap: 16px;
       flex-wrap: wrap;
-      margin: 18px 0 14px;
+      margin: 14px 0 18px;
+    }
+
+    .lead .copy{
+      max-width: 860px;
     }
 
     .lead p{
       margin:0;
-      color: var(--cu-muted);
-      max-width: 880px;
-      line-height: 1.55;
-      font-size: 1.02rem;
+      color: var(--muted);
+      line-height: 1.65;
+      font-size: 1.03rem;
     }
 
+    .callout{
+      display:inline-flex;
+      gap:10px;
+      align-items:center;
+      padding: 10px 12px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: rgba(255,255,255,.70);
+      box-shadow: 0 8px 20px rgba(15, 23, 42, .05);
+      color: var(--muted-2);
+      font-size: .92rem;
+      white-space: nowrap;
+    }
+
+    .callout strong{ color: var(--ink); font-weight: 720; }
+
+    /* Panel */
     .panel{
-      background: var(--cu-card);
-      border: 1px solid var(--cu-line);
+      background: var(--card);
+      border: 1px solid var(--line);
       border-radius: var(--radius);
       box-shadow: var(--shadow);
       overflow:hidden;
+      transform: translateY(0);
+      transition: transform .18s ease, box-shadow .18s ease;
+    }
+    .panel:hover{
+      transform: translateY(-1px);
+      box-shadow: 0 18px 55px rgba(15, 23, 42, .12);
     }
 
     .panel-head{
-      padding: 14px 16px;
-      border-bottom: 1px solid var(--cu-line);
+      padding: 16px 18px;
+      border-bottom: 1px solid var(--line);
       display:flex;
-      align-items:center;
+      align-items:flex-start;
       justify-content: space-between;
       flex-wrap: wrap;
       gap: 10px;
-      background: linear-gradient(180deg, rgba(207,184,124,.16), transparent);
+      background:
+        linear-gradient(180deg, rgba(207,184,124,.18), transparent 65%),
+        radial-gradient(700px 240px at 12% 0%, rgba(11,31,59,.06), transparent 60%);
     }
 
-    .panel-head .heading{
-      font-weight: 700;
+    .panel-title{
       margin:0;
-      color: var(--cu-ink);
+      font-size: 1.06rem;
+      font-weight: 780;
+      color: var(--ink);
+      letter-spacing: .2px;
     }
 
-    .panel-head .hint{
-      margin:0;
-      color: var(--cu-muted);
+    .panel-hint{
+      margin: 6px 0 0;
+      color: var(--muted-2);
       font-size: .95rem;
+      line-height: 1.45;
+      max-width: 720px;
     }
 
+    .panel-actions{
+      display:flex;
+      gap:10px;
+      align-items:center;
+      flex-wrap: wrap;
+    }
+
+    .btn{
+      display:inline-flex;
+      gap:10px;
+      align-items:center;
+      padding: 10px 12px;
+      border-radius: 12px;
+      border: 1px solid rgba(11,31,59,.16);
+      background: rgba(255,255,255,.85);
+      color: var(--ink);
+      font-weight: 650;
+      font-size: .93rem;
+      transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease;
+    }
+    .btn:hover{
+      transform: translateY(-1px);
+      box-shadow: var(--shadow-soft);
+      border-color: rgba(11,31,59,.26);
+      text-decoration: none;
+    }
+
+    .btn .icon{
+      width: 26px;
+      height: 26px;
+      display:grid;
+      place-items:center;
+      border-radius: 10px;
+      background: rgba(11,31,59,.06);
+      border: 1px solid rgba(11,31,59,.10);
+      color: var(--cu-navy);
+      font-weight: 800;
+    }
+
+    /* Iframe area */
     .iframeWrap{
       width:100%;
       height: 920px;
@@ -175,93 +282,122 @@
       background:#fff;
     }
 
+    /* Below */
     .below{
-      padding: 16px;
-      border-top: 1px solid var(--cu-line);
-      background: #fff;
+      padding: 18px;
+      border-top: 1px solid var(--line);
+      background:
+        linear-gradient(180deg, rgba(11,31,59,.02), transparent 70%),
+        #fff;
     }
 
     .note{
       margin:0;
-      color: var(--cu-muted);
-      font-size: .95rem;
-      line-height: 1.55;
+      color: var(--muted);
+      font-size: .96rem;
+      line-height: 1.6;
     }
 
     .grid{
       display:grid;
-      grid-template-columns: 1.2fr .8fr;
+      grid-template-columns: 1.1fr .9fr;
       gap: 14px;
       margin-top: 14px;
     }
 
-    @media (max-width: 920px){
+    @media (max-width: 960px){
       .grid{ grid-template-columns: 1fr; }
       .iframeWrap{ height: 980px; }
     }
 
     .card{
       background: #fff;
-      border: 1px solid var(--cu-line);
+      border: 1px solid var(--line);
       border-radius: var(--radius);
-      padding: 14px 14px;
-      box-shadow: 0 8px 20px rgba(16,24,40,.05);
+      padding: 16px 16px;
+      box-shadow: 0 10px 24px rgba(15,23,42,.06);
     }
 
     .card h3{
       margin: 0 0 8px;
       font-size: 1.02rem;
-      color: var(--cu-ink);
+      color: var(--ink);
+      font-weight: 780;
+      letter-spacing: .15px;
     }
 
     .card p{
       margin: 0;
-      color: var(--cu-muted);
-      line-height: 1.55;
-      font-size: .95rem;
+      color: var(--muted);
+      line-height: 1.65;
+      font-size: .96rem;
+    }
+
+    .goldbar{
+      height: 3px;
+      width: 100%;
+      background: linear-gradient(90deg, var(--cu-gold), rgba(207,184,124,.35));
+      border-radius: 999px;
+      margin: 14px 0 0;
     }
 
     .linkrow{
-      margin-top: 10px;
+      margin-top: 12px;
       display:flex;
       flex-direction: column;
-      gap: 8px;
+      gap: 10px;
     }
 
     .linkbtn{
       display:flex;
       justify-content: space-between;
       align-items:center;
-      gap: 10px;
-      padding: 10px 12px;
-      border-radius: 12px;
-      border: 1px solid var(--cu-line);
-      background: linear-gradient(180deg, rgba(11,31,59,.04), rgba(11,31,59,.01));
+      gap: 12px;
+      padding: 12px 12px;
+      border-radius: 14px;
+      border: 1px solid var(--line);
+      background:
+        linear-gradient(180deg, rgba(11,31,59,.045), rgba(11,31,59,.01));
+      transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease;
+    }
+
+    .linkbtn:hover{
+      transform: translateY(-1px);
+      box-shadow: var(--shadow-soft);
+      border-color: rgba(11,31,59,.18);
+      text-decoration: none;
     }
 
     .linkbtn strong{
-      color: var(--cu-ink);
-      font-weight: 650;
+      color: var(--ink);
+      font-weight: 720;
     }
 
     .linkbtn span{
-      color: var(--cu-muted);
+      color: var(--muted-2);
       font-size: .9rem;
     }
 
-    .goldbar{
-      height: 3px;
-      width: 100%;
-      background: var(--cu-gold);
-      border-radius: 999px;
-      margin: 12px 0 0;
+    .arrow{
+      color: var(--cu-navy);
+      font-weight: 900;
+      padding-left: 6px;
+    }
+
+    /* Footer */
+    footer{
+      margin-top: 18px;
+      color: var(--muted-2);
+      font-size: .92rem;
+      text-align: center;
+      padding: 10px 0 0;
     }
   </style>
 </head>
 
 <body>
   <header class="topbar">
-    <div class="container">
+    <div class="wrap">
       <div class="brand">
         <div class="brand-left">
           <div class="badge">RIO</div>
@@ -272,26 +408,41 @@
         </div>
 
         <div class="meta">
+          <div class="chip"><span class="chip-dot"></span>Live feed</div>
           <div class="chip">Sorted by: Deadline</div>
         </div>
       </div>
     </div>
   </header>
 
-  <main>
-    <div class="container">
+  <main class="hero">
+    <div class="wrap">
       <div class="lead">
-        <p>
-          This page displays current funding opportunities identified as potentially useful for CU Boulder faculty.
-          Please use the search and filters within the feed to find opportunities that best fit your research area, eligibility, and timeline.
-        </p>
+        <div class="copy">
+          <p>
+            This page displays current funding opportunities identified as potentially useful for CU Boulder faculty.
+            Use the search and filters within the feed to find opportunities that best fit your research area, eligibility, and timeline.
+          </p>
+        </div>
+
+        <div class="callout" title="No manual refresh needed">
+          <strong>Updates continuously</strong> as Pivot-RP changes
+        </div>
       </div>
 
-      <section class="panel">
+      <section class="panel" aria-label="Funding Opportunities Panel">
         <div class="panel-head">
           <div>
-            <p class="heading">Funding Opportunities</p>
-            <p class="hint">Tip: filter by keyword, sponsor, deadline, and eligibility inside the Pivot-RP window.</p>
+            <p class="panel-title">Funding Opportunities</p>
+            <p class="panel-hint">
+              Tip: filter by keyword, sponsor, deadline, and eligibility inside the Pivot-RP window.
+            </p>
+          </div>
+
+          <div class="panel-actions">
+            <a class="btn" href="https://pivot.proquest.com/" target="_blank" rel="noreferrer">
+              <span class="icon">↗</span> Open Pivot-RP
+            </a>
           </div>
         </div>
 
@@ -305,17 +456,16 @@
 
         <div class="below">
           <p class="note">
-            Access may require institutional login. Results update automatically as opportunities are added or archived in Pivot-RP.
+            Access may require institutional login. Results update automatically as opportunities are added, updated, or archived in Pivot-RP.
           </p>
 
           <div class="grid">
             <div class="card">
               <h3>JEDIA Scholar Learning Community</h3>
               <p>
-                The JEDIA Scholar Learning Community aims to support investigators, scholars, creators and researchers across
-                the university by building a welcoming and inclusive environment. The community focuses on the development of opportunities
-                that embrace diversity, equity and inclusion principles through interdisciplinary work. Participants will strengthen their
-                capacity to create meaningful research impacts.
+                The JEDIA Scholar Learning Community supports investigators, scholars, creators and researchers across
+                the university by building a welcoming and inclusive environment. The community focuses on opportunities
+                that embrace diversity, equity and inclusion principles through interdisciplinary work.
               </p>
               <div class="goldbar"></div>
             </div>
@@ -330,7 +480,7 @@
                     <strong>RIO Bulletin</strong><br/>
                     <span>Updates and announcements</span>
                   </div>
-                  <span>↗</span>
+                  <div class="arrow">↗</div>
                 </a>
 
                 <a class="linkbtn" href="https://www.colorado.edu/researchinnovation/node/8528/faculty-development-and-workshops/jedia-workshops" target="_blank" rel="noreferrer">
@@ -338,7 +488,7 @@
                     <strong>JEDIA Workshops and Learning Community</strong><br/>
                     <span>Faculty development & workshops</span>
                   </div>
-                  <span>↗</span>
+                  <div class="arrow">↗</div>
                 </a>
 
                 <a class="linkbtn" href="https://www.colorado.edu/researchinnovation/research-impact-broader-impacts-request-consultation" target="_blank" rel="noreferrer">
@@ -346,11 +496,15 @@
                     <strong>Research Impact & Broader Impacts</strong><br/>
                     <span>Request a consultation</span>
                   </div>
-                  <span>↗</span>
+                  <div class="arrow">↗</div>
                 </a>
               </div>
             </div>
           </div>
+
+          <footer>
+            University of Colorado Boulder · Research & Innovation Office
+          </footer>
         </div>
       </section>
     </div>
