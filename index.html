@@ -284,10 +284,10 @@
 
     /* Below */
     .below{
-      padding: 16px 18px 10px;
+      padding: 18px;
       border-top: 1px solid var(--line);
       background:
-        linear-gradient(180deg, rgba(11,31,59,.015), rgba(11,31,59,.03)),
+        linear-gradient(180deg, rgba(11,31,59,.02), transparent 70%),
         #fff;
     }
 
@@ -301,8 +301,8 @@
     .grid{
       display:grid;
       grid-template-columns: 1.1fr .9fr;
-      gap: 12px;
-      margin-top: 12px;
+      gap: 14px;
+      margin-top: 14px;
     }
 
     @media (max-width: 960px){
@@ -315,7 +315,7 @@
       border: 1px solid var(--line);
       border-radius: var(--radius);
       padding: 16px 16px;
-      box-shadow: 0 8px 18px rgba(15,23,42,.05);
+      box-shadow: 0 10px 24px rgba(15,23,42,.06);
     }
 
     .card h3{
@@ -384,31 +384,13 @@
       padding-left: 6px;
     }
 
-    /* Footer band to "close" the page nicely */
+    /* Footer */
     footer{
       margin-top: 18px;
-      padding: 14px 10px 6px;
-      text-align: center;
       color: var(--muted-2);
       font-size: .92rem;
-
-      border-top: 1px solid var(--line);
-      background: linear-gradient(180deg, rgba(11,31,59,.03), rgba(11,31,59,.00));
-    }
-
-    footer::before{
-      content:"";
-      display:block;
-      height:3px;
-      width:140px;
-      margin: 0 auto 10px;
-      border-radius: 999px;
-      background: linear-gradient(90deg, var(--cu-gold), rgba(207,184,124,.35));
-    }
-
-    /* Respect reduced motion */
-    @media (prefers-reduced-motion: reduce){
-      *{ transition: none !important; scroll-behavior: auto; }
+      text-align: center;
+      padding: 10px 0 0;
     }
   </style>
 </head>
