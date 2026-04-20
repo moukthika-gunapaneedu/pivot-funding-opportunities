@@ -1,7 +1,7 @@
 # RIO Live Funding Opportunity Feed (Pivot-RP)
 
 This repository hosts a public-facing web page that displays a live, curated feed of funding opportunities for CU Boulder faculty, powered by Pivot-RP embedded searches.
-Link to the website: https://moukthika-gunapaneedu.github.io/pivot-funding-opportunities/
+Link to the website: https://ucboulder.github.io/pivot-funding-opportunities/
 
 ## What this page does
 
